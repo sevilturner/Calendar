@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CalendarRoundTwo.Models.Calendar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Calendar</h2>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#datepicker").datepicker({
+                onSelect: function (dateText, inst) {
+                    var day = inst.selectedDay;
+                    var month = inst.selectedMonth;
+                    var year = inst.selectedYear;
+                    var newUrl = "/Calendar/Index?Year=" + year + "&Month=" + month +"&Day=" + day;
+                    window.location.href = newUrl;
+                }
+            });
+        });
+    });
+</script>
+
+<p>
+
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="datepicker"></div>
+
+@foreach (var item in Model)
+{
+    <p>@item.Title</p>
+}
